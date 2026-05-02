@@ -1,6 +1,7 @@
 package com.example.ecommerce.servlet;
 
 import com.example.ecommerce.model.Product;
+import com.example.ecommerce.service.ProductService;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -11,7 +12,6 @@ import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @WebServlet(urlPatterns = "/cart")
 public class CartServlet extends HttpServlet {
@@ -22,7 +22,9 @@ public class CartServlet extends HttpServlet {
         if (cart == null) {
             cart = new ArrayList<>();
         }
+        double total = ProductService.calculateCartTotal(cart);
         req.setAttribute("cart", cart);
+        req.setAttribute("total", total);
         req.getRequestDispatcher("/cart.jsp").forward(req, resp);
     }
 
@@ -30,7 +32,7 @@ public class CartServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String productId = req.getParameter("productId");
         if (productId != null && !productId.isEmpty()) {
-            Product product = findProduct(productId);
+            Product product = ProductService.getProductById(productId);
             if (product != null) {
                 HttpSession session = req.getSession();
                 List<Product> cart = (List<Product>) session.getAttribute("cart");
@@ -42,15 +44,5 @@ public class CartServlet extends HttpServlet {
             }
         }
         resp.sendRedirect(req.getContextPath() + "/cart");
-    }
-
-    private Product findProduct(String id) {
-        switch (id) {
-            case "P001": return new Product("P001", "Wireless Mouse", 24.99);
-            case "P002": return new Product("P002", "Mechanical Keyboard", 79.99);
-            case "P003": return new Product("P003", "USB-C Charger", 19.99);
-            case "P004": return new Product("P004", "Noise Cancelling Headphones", 129.99);
-            default: return null;
-        }
     }
 }

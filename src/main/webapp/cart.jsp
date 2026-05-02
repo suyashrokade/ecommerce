@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -46,7 +47,11 @@
             </tbody>
         </table>
         <div class="cart-summary">
-            <span class="cart-total">Total Items: ${cart.size()}</span>
+            <div class="cart-item-count">📦 Items in Cart: <strong>${cart.size()}</strong></div>
+            <div class="cart-total">💰 Total: <strong>$<fmt:formatNumber value="${total}" type="number" maxFractionDigits="2" minFractionDigits="2"/></strong></div>
+        </div>
+        <div style="text-align: center; margin-top: 20px;">
+            <a href="products" class="btn">Continue Shopping</a>
         </div>
     </c:if>
 </div>
