@@ -4,31 +4,38 @@
 <html>
 <head>
     <meta charset="UTF-8" />
-    <title>Products</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Products - Ecommerce</title>
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-<h1>Product Catalog</h1>
-<table border="1" cellpadding="8">
-    <tr>
-        <th>ID</th>
-        <th>Name</th>
-        <th>Price</th>
-        <th>Action</th>
-    </tr>
-    <c:forEach var="product" items="${products}">
-        <tr>
-            <td>${product.id}</td>
-            <td>${product.name}</td>
-            <td>$${product.price}</td>
-            <td>
-                <form action="cart" method="post">
+<div class="container">
+    <header>
+        <h1>Product Catalog</h1>
+        <p class="header-subtitle">Browse our selection of premium tech products</p>
+    </header>
+    <nav>
+        <a href="/">Home</a>
+        <a href="products">Products</a>
+        <a href="cart">View Cart</a>
+    </nav>
+    
+    <div style="display: flex; flex-wrap: wrap; margin-top: 30px;">
+        <c:forEach var="product" items="${products}">
+            <div class="product-card">
+                <h3>${product.name}</h3>
+                <span class="price">$${product.price}</span>
+                <p style="color: #999; font-size: 0.9em;">ID: ${product.id}</p>
+                <form action="cart" method="post" style="margin-top: 15px;">
                     <input type="hidden" name="productId" value="${product.id}" />
-                    <button type="submit">Add to Cart</button>
+                    <button type="submit" class="btn">Add to Cart</button>
                 </form>
-            </td>
-        </tr>
-    </c:forEach>
-</table>
-<p><a href="/">Home</a> | <a href="cart">View Cart</a></p>
+            </div>
+        </c:forEach>
+    </div>
+</div>
+<footer>
+    <p>&copy; 2026 Simple Ecommerce. Deployed with Jenkins & Tomcat.</p>
+</footer>
 </body>
 </html>

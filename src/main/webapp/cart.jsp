@@ -4,29 +4,54 @@
 <html>
 <head>
     <meta charset="UTF-8" />
-    <title>Shopping Cart</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Shopping Cart - Ecommerce</title>
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-<h1>Your Cart</h1>
-<c:if test="${empty cart}">
-    <p>Your cart is empty.</p>
-</c:if>
-<c:if test="${not empty cart}">
-    <table border="1" cellpadding="8">
-        <tr>
-            <th>ID</th>
-            <th>Name</th>
-            <th>Price</th>
-        </tr>
-        <c:forEach var="product" items="${cart}">
-            <tr>
-                <td>${product.id}</td>
-                <td>${product.name}</td>
-                <td>$${product.price}</td>
-            </tr>
-        </c:forEach>
-    </table>
-</c:if>
-<p><a href="/">Home</a> | <a href="products">Continue Shopping</a></p>
+<div class="container">
+    <header>
+        <h1>Your Shopping Cart</h1>
+        <p class="header-subtitle">Review and manage your items</p>
+    </header>
+    <nav>
+        <a href="/">Home</a>
+        <a href="products">Continue Shopping</a>
+    </nav>
+    
+    <c:if test="${empty cart}">
+        <div class="empty-message">
+            <p>Your cart is empty.</p>
+            <p style="margin-top: 20px;"><a href="products" class="btn">Start Shopping</a></p>
+        </div>
+    </c:if>
+    
+    <c:if test="${not empty cart}">
+        <table>
+            <thead>
+                <tr>
+                    <th>Product ID</th>
+                    <th>Product Name</th>
+                    <th>Price</th>
+                </tr>
+            </thead>
+            <tbody>
+                <c:forEach var="product" items="${cart}">
+                    <tr>
+                        <td>${product.id}</td>
+                        <td>${product.name}</td>
+                        <td class="price">$${product.price}</td>
+                    </tr>
+                </c:forEach>
+            </tbody>
+        </table>
+        <div class="cart-summary">
+            <span class="cart-total">Total Items: ${cart.size()}</span>
+        </div>
+    </c:if>
+</div>
+<footer>
+    <p>&copy; 2026 Simple Ecommerce. Deployed with Jenkins & Tomcat.</p>
+</footer>
 </body>
 </html>
