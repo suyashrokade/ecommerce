@@ -6,7 +6,11 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Products - Ecommerce</title>
+<<<<<<< HEAD
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
+=======
+    <link rel="stylesheet" href="css/style.css">
+>>>>>>> fed4cb1e63e057ff8a6476ebafaaed01ed6ead0e
 </head>
 <body>
 <div class="container">

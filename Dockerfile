@@ -15,7 +15,11 @@ RUN mvn clean package -DskipTests
 
 
 # =========================================
+<<<<<<< HEAD
 # Stage 2 -> Run Application on Tomcat
+=======
+# Stage 2 -> Tomcat Runtime
+>>>>>>> fed4cb1e63e057ff8a6476ebafaaed01ed6ead0e
 # =========================================
 FROM tomcat:10.1-jdk17-temurin
 
